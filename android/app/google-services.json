@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "420625969140",
+    "project_id": "rn-hackathon",
+    "storage_bucket": "rn-hackathon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420625969140:android:19c5225a80f27794ead3a1",
+        "android_client_info": {
+          "package_name": "com.realestate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420625969140-lsb6fjf73nmt8heelhhe7oisd7gr0n4u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcdNnQXvJMsyEwFODUzIfhYSLrZJrIRFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420625969140-lsb6fjf73nmt8heelhhe7oisd7gr0n4u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
