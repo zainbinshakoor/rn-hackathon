@@ -2,11 +2,18 @@ import React, { useState } from 'react'
 import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import CustomButton from '../../components/CustomButton';
 import { useAuthContext } from '../../contexts/AuthContext';
-export default function Profile({navigation}) {
+import auth from '@react-native-firebase/auth';
+
+export default function Profile({ navigation }) {
   const [image, setImage] = useState({});
 
   const { user } = useAuthContext();
-  
+  const handleLogout = () => {
+    auth().signOut()
+
+
+  }
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={[styles.cover]}>
@@ -22,7 +29,7 @@ export default function Profile({navigation}) {
         <TouchableOpacity>
           <Image
             style={[styles.userImg]}
-            source={{ uri: user.url? user.url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2wrXPLf0fSGdZXCPKp3Y-NrRNrnWLqQwvoQ&usqp=CAU' }}
+            source={{ uri: user.url ? user.url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2wrXPLf0fSGdZXCPKp3Y-NrRNrnWLqQwvoQ&usqp=CAU' }}
 
           />
 
@@ -60,9 +67,11 @@ export default function Profile({navigation}) {
       </View>
       <TouchableOpacity style={styles.customBtn}>
 
-        <CustomButton label={'Edit Profile'} onPress={()=>navigation.navigate("UpdateProfile")}>
+        <CustomButton label={'Edit Profile'} onPress={() => navigation.navigate("UpdateProfile")}>
+
 
         </CustomButton>
+        <CustomButton label={'logout Profile'} onPress={(handleLogout)}></CustomButton>
       </TouchableOpacity>
 
     </ScrollView>

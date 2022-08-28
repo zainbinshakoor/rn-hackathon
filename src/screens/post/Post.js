@@ -65,10 +65,34 @@ export default function Post({ navigation }) {
     }
     const id = Math.random().toString(36).slice(2)
     const singleItem = {
-        title, detail, price, location, type ,area
+        title, detail, price, location, type, area
     }
     singleItem.id = id
     const productUpload = async () => {
+        if (!title) {
+            alert("Please enter your Title")
+            return
+        }
+        if (!location) {
+            alert("Please enter your location")
+            return
+        }
+
+        if (!detail) {
+            alert("Please enter your detail")
+            return
+        }
+        if (!price) {
+            alert("Please enter price")
+            return
+        }
+        if (!type) {
+            alert("Please enter type")
+            return
+        }
+        if (!area) {
+            alert("please enter Area")
+        }
         if (image.uri) {
             await storage().ref(`images/${image.fileName}`).putFile(image.uri).then(async () => {
                 const url = await storage().ref(`images/${image.fileName}`).getDownloadURL();
@@ -98,6 +122,15 @@ export default function Post({ navigation }) {
 
 
         }
+        setTitle("")
+        setprice("")
+        setDetail("")
+        setArea("")
+        setLocation("")
+        setType("")
+        setImage("")
+
+
     }
     return (
         <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
@@ -233,6 +266,7 @@ export default function Post({ navigation }) {
                 <TouchableOpacity>
 
                     <CustomButton label={'Add Data'} onPress={productUpload} />
+
                 </TouchableOpacity>
 
 

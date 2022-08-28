@@ -6,7 +6,6 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-
 import DatePicker from 'react-native-date-picker';
 import InputField from "../../../components/InputField";
 
@@ -37,15 +36,29 @@ export default function Register({ navigation }) {
 
 
 
-
   const handleSubmit = () => {
     let userDoc = {
       userName: name,
       userEmail: email,
       doBirth: date
     }
-
-
+    if (!email) {
+      alert("Please enter your email")
+      return
+    }
+    if (password.length < 6) {
+      alert("Password must be 6 chars")
+      return
+    }
+    if(!name){
+      alert("Enter Your Name")
+      return
+    }
+    if(!dob){
+      alert("Enter Your Name")
+      return
+    }
+    
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {

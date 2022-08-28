@@ -4,6 +4,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 
 import auth from '@react-native-firebase/auth';
@@ -26,10 +27,18 @@ export default function Login({ navigation }) {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
+  const [isProcessing, setIsProcessing] = useState(false)
   const handleLogin = () => {
 
-
+    if (!email) {
+      alert("Please enter your email")
+      return
+    }
+    if (password.length < 6) {
+      alert("Password must be 6 chars")
+      return
+    }
+    setIsProcessing(true)
     try {
       auth().signInWithEmailAndPassword(email, password).then((userCredential) => {
         const user = userCredential.user;
@@ -38,7 +47,7 @@ export default function Login({ navigation }) {
       })
     } catch (error) {
       alert(error);
-
+      setIsProcessing(false)
     }
 
   }
@@ -99,7 +108,7 @@ export default function Login({ navigation }) {
 
         />
 
-        <CustomButton label={"Login"} onPress={handleLogin} />
+        <CustomButton label={"Login"} onPress={handleLogin}    ActivityIndicator={isProcessing ? true : false}/>
 
         <Text style={{ textAlign: 'center', color: '#666', marginBottom: 30 }}>
           Or, login with ...

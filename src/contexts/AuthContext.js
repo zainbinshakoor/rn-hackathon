@@ -14,8 +14,8 @@ export default function AuthContextProvider({ children }) {
             const favourties = await AsyncStorage.getItem('Favourtie')
             const localFavourite = JSON.parse(favourties)
 
-            setFav(localFavourite)
             console.log("local Fav", localFavourite)
+            setFav(localFavourite)
 
         } catch (e) {
             console.error(e)

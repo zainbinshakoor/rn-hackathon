@@ -107,7 +107,7 @@ const Home = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('favourite')}>
             <MaterialCommunityIcons
-              name="cart"
+              name="cart-heart"
               style={{
                 fontSize: 18,
                 color: COLOURS.backgroundMedium,

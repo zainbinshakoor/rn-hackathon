@@ -62,38 +62,27 @@ export default function SingleItem({ navigation, route }) {
             <Text style={styles.subtitle}>Area</Text>
             <Text style={styles.price}>{product.area}</Text>
           </View>
-
-          {/* <TouchableOpacity >
-            <View style={styles.basketContainer}>
-              <Text style={styles.addToBasket}>Contact Us</Text>
-              <View style={styles.basketIcon}>
-                <Icon name="shopping-basket" size={20} color={COLOURS.primary} />
-              </View>
-            </View>
-          </TouchableOpacity> */}
-        </View>
-        <View style={styles.bottomRow}>
           <View style={styles.priceContainer}>
             <Text style={styles.subtitle}>Total Price</Text>
             <Text style={styles.price}>$ {product.price}</Text>
           </View>
+
+        
+        </View>
+        <View style={styles.bottomRow}>
+          
           <View style={styles.priceContainer}>
             <Text style={styles.subtitle}>User Phone</Text>
             <Text style={styles.price}> {user.phonenumber} </Text>
           </View>
-          {/* <TouchableOpacity >
-            <View style={styles.basketContainer}>
-              <Text style={styles.addToBasket}>Contact Us</Text>
-              <View style={styles.basketIcon}>
-                <Icon name="shopping-basket" size={20} color={COLOURS.primary} />
-              </View>
-            </View>
-          </TouchableOpacity> */}
+          <TouchableOpacity onPress={() => setItem(product)}>
+
+            <Icon name="heart" size={20} color={COLOURS.primary} />
+
+          </TouchableOpacity>
 
         </View>
-        <Button title="Button" onPress={() => setItem(product)}>
 
-        </Button>
       </ScrollView>
     </SafeAreaView>
   )
