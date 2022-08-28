@@ -30,7 +30,6 @@ export default function Register({ navigation }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [dob, setDob] = useState("");
 
 
 
@@ -50,15 +49,12 @@ export default function Register({ navigation }) {
       alert("Password must be 6 chars")
       return
     }
-    if(!name){
-      alert("Enter Your Name")
+
+    if (!name) {
+      alert("Enter Your name")
       return
     }
-    if(!dob){
-      alert("Enter Your Name")
-      return
-    }
-    
+
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
@@ -257,8 +253,6 @@ export default function Register({ navigation }) {
           onCancel={() => {
             setOpen(false);
           }}
-          labelValue={dob}
-          onChangeText={(userDob) => setDob(userDob)}
 
         />
 
