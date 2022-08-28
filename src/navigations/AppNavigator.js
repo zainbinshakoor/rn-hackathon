@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -19,6 +19,15 @@ export default function AppNavigator() {
     console.log(authenticated)
     const Stack = createNativeStackNavigator();
     const Tab = createBottomTabNavigator();
+    const LoginStack = () => {
+        return (
+            <Stack.Navigator>
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Register" component={Register} />
+                <Stack.Screen name='Forgot' component={Forgot} />
+            </Stack.Navigator>
+        )
+    }
     const ProfileStack = () => {
         return (
             <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -32,7 +41,7 @@ export default function AppNavigator() {
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Detail" component={Detail} />
-                <Stack.Screen name='favourite' component={Favourite}/>
+                <Stack.Screen name='favourite' component={Favourite} />
             </Stack.Navigator>
         )
     }
@@ -41,11 +50,29 @@ export default function AppNavigator() {
 
         <NavigationContainer>
             {!authenticated ?
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name="Login" component={Login} />
-                    <Stack.Screen name="Register" component={Register} />
-                    <Stack.Screen name='Forgot' component={Forgot} />
-                </Stack.Navigator>
+
+                <Tab.Navigator options={{ headerShown: false }}>
+                    
+                        <Tab.Screen name="LoginStack" component={LoginStack}
+                            options={{
+                                headerShown: false,
+                                tabBarLabel: 'Login',
+                                tabBarIcon: ({ color, size }) => (
+                                    <Icon name="profile" color={color} size={size} />
+                                ),
+                            }}
+                        />
+                   
+                    <Tab.Screen name="DetailItem" component={DetailItem}
+                        options={{
+                            headerShown: false,
+                            tabBarLabel: 'Home',
+                            tabBarIcon: ({ color, size }) => (
+                                <Icon name="home" color={color} size={size} />
+                            ),
+                        }}
+                    />
+                </Tab.Navigator>
                 :
                 <Tab.Navigator
 
@@ -59,6 +86,7 @@ export default function AppNavigator() {
                             ),
                         }}
                     />
+
 
                     <Tab.Screen name="Post" component={Post}
                         options={{

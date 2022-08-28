@@ -67,14 +67,17 @@ export default function SingleItem({ navigation, route }) {
             <Text style={styles.price}>$ {product.price}</Text>
           </View>
 
-        
+
         </View>
         <View style={styles.bottomRow}>
-          
+
           <View style={styles.priceContainer}>
+
             <Text style={styles.subtitle}>User Phone</Text>
             <Text style={styles.price}> {user.phonenumber} </Text>
           </View>
+          
+
           <TouchableOpacity onPress={() => setItem(product)}>
 
             <Icon name="heart" size={20} color={COLOURS.primary} />
