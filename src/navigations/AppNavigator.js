@@ -11,6 +11,7 @@ import Profile from '../screens/profile/Profile';
 import UpdateProfile from '../screens/profile/UpdateProfile';
 import Detail from '../screens/home/Detail';
 import Post from '../screens/post/Post';
+import Favourite from '../screens/favourite/Favourite';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useAuthContext } from '../contexts/AuthContext';
 export default function AppNavigator() {
@@ -31,6 +32,7 @@ export default function AppNavigator() {
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Detail" component={Detail} />
+                <Stack.Screen name='favourite' component={Favourite}/>
             </Stack.Navigator>
         )
     }

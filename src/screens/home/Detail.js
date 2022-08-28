@@ -3,8 +3,9 @@ import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Image, StyleShe
 import Icon from "react-native-vector-icons/FontAwesome";
 import { COLOURS, SIZES, FONTWEIGHT } from "../../components/db";
 import { useAuthContext } from "../../contexts/AuthContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function SingleItem({ navigation, route }) {
-  const { user,fav } = useAuthContext();
+  const { user, fav, setFav } = useAuthContext();
   const item = route.params;
   const product = item.item
 
@@ -13,15 +14,15 @@ export default function SingleItem({ navigation, route }) {
   const setItem = (product) => {
     let array = fav.slice(0);
     array.push(product)
-    console.log(array)
-    // try {
-    //     AsyncStorage.setItem("user", JSON.stringify(array))
-    //         .then(() => {
-    //             console.log("user is added")
-    //         })
-    // } catch (error) {
-    //     console.log(error);
-    // }
+    setFav(array)
+    try {
+      AsyncStorage.setItem("Favourtie", JSON.stringify(fav))
+        .then(() => {
+          console.log("Favourtie is added")
+        })
+    } catch (error) {
+      console.log(error);
+    }
 
   }
 
@@ -48,7 +49,7 @@ export default function SingleItem({ navigation, route }) {
         <View>
           <Text style={styles.description}>{product.type}</Text>
         </View>
-       
+
         <View>
           <Text style={styles.description}>{product.detail}</Text>
         </View>
@@ -61,7 +62,7 @@ export default function SingleItem({ navigation, route }) {
             <Text style={styles.subtitle}>Area</Text>
             <Text style={styles.price}>{product.area}</Text>
           </View>
-         
+
           {/* <TouchableOpacity >
             <View style={styles.basketContainer}>
               <Text style={styles.addToBasket}>Contact Us</Text>
@@ -90,9 +91,9 @@ export default function SingleItem({ navigation, route }) {
           </TouchableOpacity> */}
 
         </View>
-<Button title="Button" onPress={()=>setItem(product)}>
+        <Button title="Button" onPress={() => setItem(product)}>
 
-</Button>
+        </Button>
       </ScrollView>
     </SafeAreaView>
   )
