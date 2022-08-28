@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Image, StyleSheet } from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Image, StyleSheet, Button } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { COLOURS, SIZES, FONTWEIGHT } from "../../components/db";
+import { useAuthContext } from "../../contexts/AuthContext";
 export default function SingleItem({ navigation, route }) {
+  const { user,fav } = useAuthContext();
   const item = route.params;
   const product = item.item
 
 
 
   const setItem = (product) => {
-    let array = cart.slice(0)
+    let array = fav.slice(0);
     array.push(product)
+    console.log(array)
     // try {
     //     AsyncStorage.setItem("user", JSON.stringify(array))
     //         .then(() => {
@@ -45,6 +48,7 @@ export default function SingleItem({ navigation, route }) {
         <View>
           <Text style={styles.description}>{product.type}</Text>
         </View>
+       
         <View>
           <Text style={styles.description}>{product.detail}</Text>
         </View>
@@ -54,18 +58,41 @@ export default function SingleItem({ navigation, route }) {
         </View>
         <View style={styles.bottomRow}>
           <View style={styles.priceContainer}>
-            <Text style={styles.subtitle}>Total Price</Text>
-            <Text style={styles.price}>$ {product.price}</Text>
+            <Text style={styles.subtitle}>Area</Text>
+            <Text style={styles.price}>{product.area}</Text>
           </View>
-          <TouchableOpacity >
+         
+          {/* <TouchableOpacity >
             <View style={styles.basketContainer}>
-              <Text style={styles.addToBasket}>Add to basket</Text>
+              <Text style={styles.addToBasket}>Contact Us</Text>
               <View style={styles.basketIcon}>
                 <Icon name="shopping-basket" size={20} color={COLOURS.primary} />
               </View>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
+        <View style={styles.bottomRow}>
+          <View style={styles.priceContainer}>
+            <Text style={styles.subtitle}>Total Price</Text>
+            <Text style={styles.price}>$ {product.price}</Text>
+          </View>
+          <View style={styles.priceContainer}>
+            <Text style={styles.subtitle}>User Phone</Text>
+            <Text style={styles.price}> {user.phonenumber} </Text>
+          </View>
+          {/* <TouchableOpacity >
+            <View style={styles.basketContainer}>
+              <Text style={styles.addToBasket}>Contact Us</Text>
+              <View style={styles.basketIcon}>
+                <Icon name="shopping-basket" size={20} color={COLOURS.primary} />
+              </View>
+            </View>
+          </TouchableOpacity> */}
+
+        </View>
+<Button title="Button" onPress={()=>setItem(product)}>
+
+</Button>
       </ScrollView>
     </SafeAreaView>
   )
@@ -130,7 +157,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 20,
-    paddingBottom: 80,
+    // paddingBottom: 80,
   },
   priceContainer: {
     justifyContent: 'center',

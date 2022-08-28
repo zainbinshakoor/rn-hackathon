@@ -5,7 +5,8 @@ const AppContext = createContext();
 export default function AuthContextProvider({ children }) {
     const [authenticated, setAuthenticated] = useState(false);
     const [user, setUser] = useState({});
-   
+    const [fav, setFav] = useState([]);
+
     useEffect(() => {
         auth().onAuthStateChanged(async (user) => {
 
@@ -20,7 +21,7 @@ export default function AuthContextProvider({ children }) {
 
     }, []);
     return (
-        <AppContext.Provider value={{ authenticated, setAuthenticated,user ,setUser}}>
+        <AppContext.Provider value={{ authenticated, setAuthenticated, user, fav, setFav }}>
 
             {children}
 
