@@ -95,10 +95,12 @@ const styles = StyleSheet.create({
 
 
   }, card: {
-    width: width * 0.503,
+    width: width * 0.543,
     height: 100,
     marginBottom: 110,
-    borderRadius: 15
+    borderRadius: 15,
+    marginLeft:4
+
   },
   subCard: {
     height: 400,
