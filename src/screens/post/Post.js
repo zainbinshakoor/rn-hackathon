@@ -9,7 +9,6 @@ import {
     StyleSheet
 } from 'react-native';
 
-import DatePicker from 'react-native-date-picker';
 import InputField from "../../components/InputField";
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -24,12 +23,13 @@ import storage from '@react-native-firebase/storage';
 
 
 export default function Post({ navigation }) {
-    const [date, setDate] = useState(new Date());
-    const [open, setOpen] = useState(false);
-    const [dobLabel, setDobLabel] = useState('Date of Product');
+
     const [title, setTitle] = useState("");
+    const [location, setLocation] = useState("");
     const [detail, setDetail] = useState("");
     const [price, setprice] = useState("");
+    const [type, setType] = useState("");
+    const [area, setArea] = useState();
 
     const [image, setImage] = useState({});
 
@@ -65,7 +65,7 @@ export default function Post({ navigation }) {
     }
     const id = Math.random().toString(36).slice(2)
     const singleItem = {
-        title, detail, price, date
+        title, detail, price, location, type ,area
     }
     singleItem.id = id
     const productUpload = async () => {
@@ -104,7 +104,7 @@ export default function Post({ navigation }) {
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 style={{ paddingHorizontal: 25 }}>
-               
+
 
                 <Text
                     style={{
@@ -120,7 +120,7 @@ export default function Post({ navigation }) {
 
 
                 <Text style={{ textAlign: 'center', color: '#666', marginBottom: 30 }}>
-                    Post 
+                    Post
                 </Text>
 
                 <InputField
@@ -137,7 +137,34 @@ export default function Post({ navigation }) {
                     onChangeText={(userName) => setTitle(userName)}
 
                 />
+                <InputField
+                    label={'Location'}
+                    icon={
+                        <Ionicons
+                            name="location"
+                            size={20}
+                            color="#666"
+                            style={{ marginRight: 5 }}
+                        />
+                    }
+                    labelValue={location}
+                    onChangeText={(userName) => setLocation(userName)}
 
+                />
+                <InputField
+                    label={'Type'}
+                    icon={
+                        <Ionicons
+                            name="information-circle-outline"
+                            size={20}
+                            color="#666"
+                            style={{ marginRight: 5 }}
+                        />
+                    }
+                    labelValue={type}
+                    onChangeText={(userName) => setType(userName)}
+
+                />
                 <InputField
                     label={'detail'}
                     icon={
@@ -150,6 +177,20 @@ export default function Post({ navigation }) {
                     }
                     labelValue={detail}
                     onChangeText={(itemDetail) => setDetail(itemDetail)}
+
+                />
+                <InputField
+                    label={'Area in square'}
+                    icon={
+                        <Ionicons
+                            name="md-layers-outline"
+                            size={20}
+                            color="#666"
+                            style={{ marginRight: 5 }}
+                        />
+                    }
+                    labelValue={area}
+                    onChangeText={(itemPrice) => setArea(itemPrice)}
 
                 />
 
@@ -170,45 +211,6 @@ export default function Post({ navigation }) {
 
 
 
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        borderBottomColor: '#ccc',
-                        borderBottomWidth: 1,
-                        paddingBottom: 8,
-                        marginBottom: 30,
-                    }}>
-                    <Ionicons
-                        name="calendar-outline"
-                        size={20}
-                        color="#666"
-                        style={{ marginRight: 5 }}
-                    />
-                    <TouchableOpacity onPress={() => setOpen(true)}>
-                        <Text style={{ color: '#666', marginLeft: 5, marginTop: 5 }}>
-                            {dobLabel}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-
-                <DatePicker
-                    modal
-                    open={open}
-                    date={date}
-                    mode={'date'}
-                    maximumDate={new Date('2030-01-01')}
-                    minimumDate={new Date('1980-01-01')}
-                    onConfirm={date => {
-                        setOpen(false);
-                        setDate(date);
-                        setDobLabel(date.toDateString());
-                    }}
-                    onCancel={() => {
-                        setOpen(false);
-                    }}
-
-
-                />
                 <TouchableOpacity onPress={imageUplaod}>
                     {image.uri
                         ?
